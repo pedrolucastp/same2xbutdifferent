@@ -105,15 +105,19 @@
 
         .reveal {
             position: relative;
-            transform: translateY(100px);
+            transform: translateY(20vh); /* Adjust as needed for effect */
             opacity: 0;
-            transition: all 0.6s ease-out;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, visibility 0.6s;
+            visibility: hidden; /* Ensure they're not just transparent but also not "visible" */
+            
         }
         
         .reveal.active {
             transform: translateY(0);
             opacity: 1;
+            visibility: visible;
         }
+
         @media only screen and (max-width: 768px) {
             header, section, footer {
                 padding: 20px 10px;
@@ -148,22 +152,22 @@
     <img src="https://source.unsplash.com/random/1600x900?business,events" alt="Elegant Business Events">
 </section>
     
-<section class="intro">
+<section class="intro reveal">
     <h2>Quem Somos</h2>
     <p>Explorando a essência da singularidade, "Same2x But Different" estabelece novos paradigmas em curadoria para experiências memoráveis.</p>
 </section>
 
-<section class="services">
+<section class="services reveal">
     <h2>Nossos Serviços</h2>
     <p>Um leque de serviços de curadoria personalizada, criando momentos que transcendem o convencional.</p>
 </section>
 
-<section class="testimonials">
+<section class="testimonials reveal">
     <h2>Depoimentos</h2>
     <p>Impressões autênticas de nossos clientes sobre as jornadas inesquecíveis que compartilhamos.</p>
 </section>
 
-<section class="contact">
+<section class="contact reveal">
     <h2>Contate-Nos</h2>
     <p>Para descobrir mais ou iniciar sua experiência personalizada, entre em contato conosco.</p>
     <!-- Example Contact Form - Implement server-side handling accordingly -->
@@ -179,22 +183,22 @@
     <p>&copy; 2024 Same2x But Different. Todos os direitos reservados.</p>
 </footer>
 <script>
-     document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('contactForm');
-        
-        form.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent the default form submission
-            
-            // Retrieve form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // Construct the mailto link
-            const mailtoLink = `mailto:pedro@gmail.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name} (${email})`;
-            
-            // Open the mailto link in a new window/tab
-            window.open(mailtoLink, '_blank');
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optionally, stop observing the section after it becomes active
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1, // Consider lowering this to make sections active sooner
+        });
+
+        // Only observe sections with the 'reveal' class
+        document.querySelectorAll('section.reveal').forEach(section => {
+            observer.observe(section);
         });
     });
     
