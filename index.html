@@ -149,7 +149,7 @@
 </header>
     
 <section class="hero">
-    <img src="https://source.unsplash.com/random/1600x900?forest,ocean,breeze" alt="Elegant Business Events">
+    <img src="https://source.unsplash.com/random/1600x900?nature,summer,tech,art" alt="Elegant Business Events">
 </section>
     
 <section class="intro reveal">
@@ -208,7 +208,7 @@
 
         setInterval(() => {
             const nextImage = new Date().getTime();
-            preloadImage.src = 'https://source.unsplash.com/random/1600x900?business,events&' + nextImage;
+            preloadImage.src = 'https://source.unsplash.com/random/1600x900?nature,summer,tech,art&' + nextImage;
 
             preloadImage.onload = () => {
                 heroImage.src = preloadImage.src;
