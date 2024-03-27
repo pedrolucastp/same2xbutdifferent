@@ -52,6 +52,31 @@
             color: #333;
             text-decoration: none;
         }
+        section.hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+section {
+    animation: fadeIn 2s ease-out;
+}
+
+/* Button and link hover effect */
+input[type="submit"], a {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+input[type="submit"]:hover, a:hover {
+    background-color: #444; /* Change as needed */
+    color: #fff;
+}
     </style>
 </head>
 <body>
@@ -60,7 +85,11 @@
     <h1>Same2x But Different</h1>
     <p>Curadoria refinada para eventos empresariais, pessoas, conteúdo e experiências.</p>
 </header>
-
+    
+<section class="hero">
+    <img src="https://source.unsplash.com/random/1600x900?business,events" alt="Elegant Business Events">
+</section>
+    
 <section class="intro">
     <h2>Quem Somos</h2>
     <p>Explorando a essência da singularidade, "Same2x But Different" estabelece novos paradigmas em curadoria para experiências memoráveis.</p>
@@ -91,6 +120,16 @@
 <footer>
     <p>&copy; 2024 Same2x But Different. Todos os direitos reservados.</p>
 </footer>
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
 
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
 </body>
 </html>
