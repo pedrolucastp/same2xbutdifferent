@@ -182,7 +182,7 @@
 <footer>
     <p>&copy; 2024 Same2x But Different. Todos os direitos reservados.</p>
 </footer>
-<script>
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Intersection Observer for Reveal on Scroll
         const revealObserver = new IntersectionObserver((entries) => {
@@ -193,7 +193,7 @@
                 }
             });
         }, {
-            threshold: 0.6, // Adjust to control when the reveal happens
+            threshold: 0.3, // Adjust to control when the reveal happens
         });
 
         // Apply observer to sections meant to reveal
@@ -201,19 +201,15 @@
             revealObserver.observe(section);
         });
 
-        // Define heroImage by selecting the image element
-        const heroImage = document.querySelector('.hero img');
-
         // Preload and change hero image
+        const heroImage = document.querySelector('.hero img');
         let currentImage = new Date().getTime();
         const preloadImage = new Image();
 
         setInterval(() => {
             const nextImage = new Date().getTime();
-            // Ensure a proper URL by inserting '&' before the 'nextImage' query parameter
-            preloadImage.src = `https://source.unsplash.com/random/1600x900?forest,ocean,breeze&sig=${nextImage}';
+            preloadImage.src = 'https://source.unsplash.com/random/1600x900?business,events&' + nextImage;
 
-            // Once the image is loaded, change the current image
             preloadImage.onload = () => {
                 heroImage.src = preloadImage.src;
             };
@@ -222,7 +218,6 @@
         }, 5000);
     });
 </script>
-
 
 </body>
 </html>
