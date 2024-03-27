@@ -107,7 +107,7 @@
             position: relative;
             transform: translateY(20vh); /* Adjust as needed for effect */
             opacity: 0;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out, visibility 0.6s;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, visibility 0.6s;
             visibility: hidden; /* Ensure they're not just transparent but also not "visible" */
             
         }
@@ -124,7 +124,7 @@
             }
 
             h1, h2 {
-                font-size: 1.5em; /* Adjust text size for smaller screens */
+                font-size: 2.2em; /* Adjust text size for smaller screens */
             }
 
             form {
@@ -184,7 +184,7 @@
 </footer>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Intersection Observer for Reveal on Scroll
+        // Intersection Observer for Reveal on Scroll
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -193,14 +193,14 @@
                 }
             });
         }, {
-            threshold: 0.3, // Adjust to control when the reveal happens
+            threshold: 0.6, // Adjust to control when the reveal happens
         });
 
         // Apply observer to sections meant to reveal
         document.querySelectorAll('section.reveal').forEach(section => {
             revealObserver.observe(section);
         });
-    
+
         // Define heroImage by selecting the image element
         const heroImage = document.querySelector('.hero img');
 
@@ -210,32 +210,19 @@
 
         setInterval(() => {
             const nextImage = new Date().getTime();
-            preloadImage.src = 'https://source.unsplash.com/random/1600x900?forest,ocean,breeze';
-    
+            // Ensure a proper URL by inserting '&' before the 'nextImage' query parameter
+            preloadImage.src = 'https://source.unsplash.com/random/1600x900?forest,ocean,breeze&' + nextImage;
+
             // Once the image is loaded, change the current image
             preloadImage.onload = () => {
                 heroImage.src = preloadImage.src;
             };
-    
+
             currentImage = nextImage;
         }, 5000);
-
-        // Reveal sections on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, {
-            threshold: 0.5, // Adjust based on how much of the item has to be visible
-        });
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
     });
 </script>
+
 
 </body>
 </html>
