@@ -184,45 +184,43 @@
 </footer>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const observer = new IntersectionObserver((entries, observer) => {
+      // Intersection Observer for Reveal on Scroll
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // Optionally, stop observing the section after it becomes active
-                    observer.unobserve(entry.target);
+                    revealObserver.unobserve(entry.target); // Optional: Stop observing once active
                 }
             });
         }, {
-            threshold: 0.1, // Consider lowering this to make sections active sooner
+            threshold: 0.3, // Adjust to control when the reveal happens
         });
 
-        // Only observe sections with the 'reveal' class
+        // Apply observer to sections meant to reveal
         document.querySelectorAll('section.reveal').forEach(section => {
-            observer.observe(section);
+            revealObserver.observe(section);
         });
-    });
     
-    // Define heroImage by selecting the image element
-    const heroImage = document.querySelector('.hero img');
+        // Define heroImage by selecting the image element
+        const heroImage = document.querySelector('.hero img');
 
-    // Preload and change hero image
-    let currentImage = new Date().getTime();
-    const preloadImage = new Image();
+        // Preload and change hero image
+        let currentImage = new Date().getTime();
+        const preloadImage = new Image();
 
-    setInterval(() => {
-        const nextImage = new Date().getTime();
-        preloadImage.src = 'https://source.unsplash.com/random/1600x900?business,events&' + nextImage;
+        setInterval(() => {
+            const nextImage = new Date().getTime();
+            preloadImage.src = 'https://source.unsplash.com/random/1600x900?business,events&' + nextImage;
     
-        // Once the image is loaded, change the current image
-        preloadImage.onload = () => {
-            heroImage.src = preloadImage.src;
-        };
+            // Once the image is loaded, change the current image
+            preloadImage.onload = () => {
+                heroImage.src = preloadImage.src;
+            };
     
-        currentImage = nextImage;
-    }, 5000);
+            currentImage = nextImage;
+        }, 5000);
 
-    // Reveal sections on scroll
-    document.addEventListener('DOMContentLoaded', () => {
+        // Reveal sections on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -230,7 +228,7 @@
                 }
             });
         }, {
-            threshold: 0.5, // Adjust based on how much of the item has to be visible
+            threshold: 0.3, // Adjust based on how much of the item has to be visible
         });
 
         document.querySelectorAll('section').forEach(section => {
