@@ -167,7 +167,7 @@
     <h2>Contate-Nos</h2>
     <p>Para descobrir mais ou iniciar sua experiência personalizada, entre em contato conosco.</p>
     <!-- Example Contact Form - Implement server-side handling accordingly -->
-    <form>
+    <form  id="contactForm">
         <input type="text" id="name" name="name" placeholder="Seu Nome" required><br>
         <input type="email" id="email" name="email" placeholder="Seu E-mail" required><br>
         <textarea id="message" name="message" placeholder="Sua Mensagem" required></textarea><br>
@@ -179,6 +179,25 @@
     <p>&copy; 2024 Same2x But Different. Todos os direitos reservados.</p>
 </footer>
 <script>
+     document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('contactForm');
+        
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+            
+            // Retrieve form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Construct the mailto link
+            const mailtoLink = `mailto:pedro@gmail.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name} (${email})`;
+            
+            // Open the mailto link in a new window/tab
+            window.open(mailtoLink, '_blank');
+        });
+    });
+    
     // Define heroImage by selecting the image element
     const heroImage = document.querySelector('.hero img');
 
