@@ -99,12 +99,7 @@
             cursor: pointer;
         }
         
-        section.hero img {
-            width: 100%;
-            height: 50vh; /* Adjust height */
-            object-fit: cover; /* Adjust as needed */
-        }
-
+       
         .reveal {
             position: relative;
             transform: translateY(20vh); /* Adjust as needed for effect */
@@ -141,9 +136,6 @@
                 width: calc(100% - 30px); /* Adjust form elements for smaller screens */
             }
 
-            section.hero img {
-                height: 30vh; /* Adjust hero image height for smaller screens */
-            }
         }
     </style>
 </head>
@@ -153,10 +145,6 @@
     <h1>Same2x But Different</h1>
     <p>Curadoria refinada para eventos empresariais, pessoas, conteúdo e experiências.</p>
 </header>
-    
-<section class="hero">
-    <img src="https://source.unsplash.com/random/1600x900?waves" alt="Elegant Business Events">
-</section>
     
 <section class="intro reveal">
     <h2>Quem Somos</h2>
@@ -206,22 +194,6 @@
         document.querySelectorAll('section.reveal').forEach(section => {
             revealObserver.observe(section);
         });
-
-        // Preload and change hero image
-        const heroImage = document.querySelector('.hero img');
-        let currentImage = new Date().getTime();
-        const preloadImage = new Image();
-
-        setInterval(() => {
-            const nextImage = new Date().getTime();
-            preloadImage.src = 'https://source.unsplash.com/random/1600x900?waves&' + nextImage;
-
-            preloadImage.onload = () => {
-                heroImage.src = preloadImage.src;
-            };
-
-            currentImage = nextImage;
-        }, 3000);
     });
 </script>
 
